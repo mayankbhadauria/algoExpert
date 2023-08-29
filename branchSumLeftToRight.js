@@ -1,41 +1,31 @@
 
-  
-  function branchSums(root) {
-    if(!root) return 0
+function branchSums(node, currentSum=0, sum=[]) {
 
-    let queue = [];
-    let hashFn = {};
-    let sum = 0;
+    if(!node) return
 
-    queue.push(root);
-
-    hashFn[node.value] = node.value;
-    sum = node.value;
-
-    while(queue) {
-        
-        let node = queue.pop();
-
-        branchSums(node, hashFn, sum);
-
-        if(node){
-            if(node.right) {
-                queue.push(node.right);
-            }
-            else if(node.left) {
-                queue.push(node.left);
-            }
-        }
-
-    }
-
-  }
-
-  function branchSums(node, hashFn, sum) {
-    let key = node.value;
-    if(hashFn[node]) {
-
-        delete hashFn.key
-    }
+    currentSum = node.value + currentSum;
     
+    // if leaf node consolidate branch sum and push
+    if(!node.left && !node.right) sum.push(currentSum);
+
+    branchSums(node.left, currentSum, sum);
+    branchSums(node.right, currentSum, sum);
+
+    return sum;
+}
+
+let tree = {
+    value: 50,
+    left: {
+      value: 30,
+      left: { value: 20, left: null, right: null },
+      right: { value: 40, left: null, right: null }
+    },
+    right: {
+      value: 70,
+      left: { value: 60, left: null, right: null },
+      right: { value: 80, left: null, right: null }
+    }
   }
+
+  console.log(branchSums(tree));

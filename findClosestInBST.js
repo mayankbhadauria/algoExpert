@@ -8,40 +8,41 @@ function findClosestValueInBst(tree, target) {
 
 function traversBST(tree, target, closest) {
 
-    if(tree) {
+    if(!tree) return closest;
 
-        closest = findClosest(closest, target, tree);
-        
-        if(target > tree.value) {
-            if(tree.right) {
-              tree = tree.right;
-              traversBST(tree.right, target, closest);
-            }
-        }
-        else if(target < tree.value) {
-            if(tree.left) {
-              tree = tree.left;
-              traversBST(tree.left, target, closest);
-            }
-        }
-        
-        else return tree.value;
+    closest = findClosest(tree, target, closest);
+    
+    if(target > tree.value) {
+        return traversBST(tree.right, target, closest);
     }
-   
-    return closest;
+    else if(target < tree.value) {
+        return traversBST(tree.left, target, closest);
+    }
+    else return closest;
 }
 
-function findClosest(closest, target, node) {
+function findClosest(node, target, closest) {
     if(Math.abs(closest - target) > Math.abs(target - node.value)) return node.value;
-}
-  
-// This is the class of the input tree. Do not edit.
-class BST {
-    constructor(value) {
-        this.value = value;
-        this.left = null;
-        this.right = null;
-    }
+    else return closest;
 }
 
+
+let tree = {
+    value: 50,
+    left: {
+      value: 30,
+      left: { value: 20, left: null, right: null },
+      right: { value: 40, left: null, right: null }
+    },
+    right: {
+      value: 70,
+      left: { value: 60, left: null, right: null },
+      right: { value: 80, left: null, right: null }
+    }
+  }
+
+  console.log(findClosestValueInBst(tree, 41));
+
+  // learning 
+  // I was not Returning recursive calls and initial call
 
