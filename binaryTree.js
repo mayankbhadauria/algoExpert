@@ -113,7 +113,7 @@ let tree = {
 
 //Uncomment to traverse pre-order, in-order, post-order
 
-// BST.preOrderTraversal(tree);
+ BST.preOrderTraversal(tree);
 // BST.inOrderTraversal(tree);
 // BST.postOrderTraversal(tree);
 
