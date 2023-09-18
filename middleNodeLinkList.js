@@ -18,17 +18,12 @@ function middleNode(linkedList) {
                 dp = dp.next.next;
                 sp = sp.next;
             }
-            if(!dp.next) {
-                middle = sp.next; break
-            }
-            if(!dp.next.next) {
-                middle = sp.next; break
+            else{
+                return sp.next;
             }
         }
 
     }
-
-    return middle;
 }
 
 const linkedList = {
@@ -37,4 +32,8 @@ const linkedList = {
   };
 
 console.log("%j", middleNode(linkedList));
+
+//Mistake
+// instead of assign sp = sp.next I was assigning sp = head.next
+// which actually not increasing sp counter to next but always next of head.
   
